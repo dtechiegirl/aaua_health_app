@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "325344607001",
+    "project_id": "aauahealthapp",
+    "storage_bucket": "aauahealthapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325344607001:android:76219a6e9c6ec994046388",
+        "android_client_info": {
+          "package_name": "com.example.aauahealthapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbWtKRovGnGLNwIXAahhicxpKExK46nm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
