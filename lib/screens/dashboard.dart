@@ -36,6 +36,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      // ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,

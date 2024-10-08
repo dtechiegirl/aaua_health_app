@@ -1,4 +1,5 @@
 import 'package:aauahealthapp/auth/widgets/formfieldswidget.dart';
+import 'package:aauahealthapp/screens/dashboard.dart';
 import 'package:aauahealthapp/src/constant/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,11 +35,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     print(
         ' the value is $fullName, $dobVal, $matNum, $contactName, $status, $phoneNo, $groupValue, $groupValue1');
-  
+
     try {
-        setState(() {
+      setState(() {
         _isSuccess = true;
-    });
+      });
       final userUid = authUser.uid;
       final userData = await FirebaseFirestore.instance
           .collection('users')
@@ -52,12 +53,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'phoneNo': phoneNo,
         'status': status,
         'groupVal': groupValue,
-        'groupVal1': groupValue1
+        'groupVal1': groupValue1,
+        'uid' : userUid
       });
       setState(() {
-      _isSuccess = false;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text( "Registration Completed")));
+        _isSuccess = false;
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Registration Completed")));
       });
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -255,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Radio(
                       value: "Yes",
-                       activeColor: AppColors.primaryColor,
+                      activeColor: AppColors.primaryColor,
                       groupValue: groupValue1,
                       onChanged: (value) {
                         setState(() {
@@ -271,7 +273,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.only(left: 0),
                     child: Radio(
                         value: "No",
-                         activeColor: AppColors.primaryColor,
+                        activeColor: AppColors.primaryColor,
                         groupValue: groupValue1,
                         onChanged: (value) {
                           setState(() {
@@ -416,23 +418,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       _submit();
                     },
-                    child: _isSuccess ? SizedBox( height: 10, child: CircularProgressIndicator(),) : Text(
-
-                      "Complete Registration!",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                    child: _isSuccess
+                        ? SizedBox(
+                            height: 10,
+                            child: CircularProgressIndicator(),
+                          )
+                        : Text(
+                            "Complete Registration!",
+                            style: TextStyle(color: Colors.white),
+                          )),
               ),
             ],
           )),
     ]);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 25,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Dashboard(),
+              ),
+            ),
+          ),
+          automaticallyImplyLeading: false,
+        ),
         body: Padding(padding: const EdgeInsets.all(20.0), child: text),
+
+        
+
       ),
     );
     //  final authUser = FirebaseAuth.instance.currentUser!;
     // final userUid = authUser.uid;
-    //  return StreamBuilder(stream: FirebaseFirestore.instance.collection('register').where('uid', 
+    //  return StreamBuilder(stream: FirebaseFirestore.instance.collection('register').where('uid',
     // isEqualTo: userUid).snapshots(), builder: (ctx, detailsSnapshot){
     //    if (detailsSnapshot.connectionState == ConnectionState.waiting) {
     //         return Center(

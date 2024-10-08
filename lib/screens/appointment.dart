@@ -1,8 +1,11 @@
+import 'package:aauahealthapp/screens/dashboard.dart';
 import 'package:aauahealthapp/src/constant/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
+var formatter = DateFormat.yMd();
 
 class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({super.key});
@@ -27,20 +30,21 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
 
   void _submit() async {
-    var stoday = today.toString();
-    print("$groupValue, $stoday");
+    var stoday = formatter.format(today).toString();
+    // print("$groupValue, $stoday");
     try {
       setState(() {
         _isSuccess = true;
       });
       final userUid = authUser.uid;
-      final userData = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userUid)
-          .get();
+      // final userData = await FirebaseFirestore.instance
+      //     .collection('users')
+      //     .doc(userUid)
+      //     .get();
       await FirebaseFirestore.instance.collection('booking').doc(userUid).set({
-        'fullname': stoday,
+        'booking': stoday,
         'groupVal': groupValue,
+        'uid' : userUid,
       });
       setState(() {
         _isSuccess = false;
@@ -66,7 +70,19 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      
       child: Scaffold(
+        
+         appBar: AppBar(
+          toolbarHeight: 28,
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () =>  Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Dashboard(),
+              ),
+            ),),
+        
+        ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListView(

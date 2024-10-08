@@ -38,8 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           leading: Row(
             children: [
-              CircleAvatar(
-                child: Image.asset("assets/profile.png"),
+              GestureDetector(
+                child: CircleAvatar(
+                  child: Image.asset("assets/profile.png"),
+                ),
+                 onTap: (){
+                    Navigator.pushNamed(context, '/profile');
+                  },
               ),
               SizedBox(
                 width: 5,
@@ -193,19 +198,29 @@ class _HomeScreenState extends State<HomeScreen> {
               childAspectRatio: (1 / .6),
               physics: NeverScrollableScrollPhysics(),
               children: [
-                GridItemWidget(
-                  text: 'Register for Health\nServices',
-                  image: Image.asset(
-                    "assets/reg.png",
-                    height: 20,
+                GestureDetector(
+                  child: GridItemWidget(
+                    text: 'Register for Health\nServices',
+                    image: Image.asset(
+                      "assets/reg.png",
+                      height: 20,
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.pushNamed(context, '/register');
+                  },
                 ),
-                GridItemWidget(
-                  text: 'Book Appointment',
-                  image: Image.asset(
-                    "assets/appoint.png",
-                    height: 25,
+                GestureDetector(
+                  child: GridItemWidget(
+                    text: 'Book Appointment',
+                    image: Image.asset(
+                      "assets/appoint.png",
+                      height: 25,
+                    ),
                   ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/booking');
+                  },
                 ),
                 GridItemWidget(
                   text: 'Counselling',

@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
             image: AssetImage("assets/logo.png"),
             height: 150,
           ),
-          Text("AAAU HEALTH APP", style: TextStyle(color: Colors.white, fontSize: 30),)
+          Text("AAUA HEALTH APP", style: TextStyle(color: Colors.white, fontSize: 30),)
         ])),
       ),
     ));
